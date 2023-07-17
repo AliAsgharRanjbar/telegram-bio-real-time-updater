@@ -1,9 +1,9 @@
 import asyncio
 from pyrogram import Client
-from time import time             # Importing required packages
-from time import sleep
+from time import time, sleep       # Importing required packages
 from datetime import datetime
 import random
+import uvloop
 
 
 api_id = 123456789 # Your API_ID, You can get it from "https://my.telegram.org/"
@@ -29,59 +29,75 @@ def bio_clock_font(clock):
     return clock.translate(my_table)
 
 # Translating numbers in name to my desired font ;D (feel free to modify it)
+
 def name_clock_font(clock):
     x = "0123456789"
     y = "𝟬𝟭𝟮𝟯𝟰𝟱𝟲𝟳𝟴𝟵"
     my_table = clock.maketrans(x, y)
     return clock.translate(my_table)
 
-# Initializing a telegram session to my app
+async def main():
+    uvloop.install()
+    # Initializing a telegram session to my app
 
-with Client("my_account", api_id, api_hash) as app:
-    
-    while True:
-        
-        
-        sleep(1)
+    app = Client("my_account", api_id, api_hash)
 
-        # Checking minute to change
+    async with app:
 
-        if round(time()) % 60 == 0:
-            sleep(1)
-            now = datetime.now()
-            # Extracting current time (hour and minutes only)
+        while True:
+            # Checking minute to change
 
-            current_time = now.strftime("%H:%M")
-            hour = now.strftime("%H")
-            hour = int(hour)
+            if round(time()) % 60 == 0:
+                await asyncio.sleep(1)
+                now = datetime.now()
+                # Extracting current time (hour and minutes only)
 
-            text = current_time
-            bio_text = f"『{bio_clock_font(text)}』"
-            
-            lastname_text = name_clock_font(text)
-            
+                current_time = now.strftime("%H:%M")
+                hour = now.strftime("%H")
+                hour = int(hour)
 
-            if 00 <= hour <= 11:
-                profile_bio = f'ɢᴏᴏᴅ ᴍᴏʀɴɪɴɢ 🌅 | {bio_text}'
-                app.update_profile(bio=profile_bio, last_name=f"『{lastname_text}』")
+                text = current_time
+                bio_text = f"『{bio_clock_font(text)}』https://alibot.ir"
+                
+                lastname_text = name_clock_font(text)
+                
 
-            elif 12 <= hour <= 17:
-                profile_bio = f'ʙᴜᴇɴᴀꜱ ᴛᴀʀᴅᴇꜱ ☀ | {bio_text}'
+                if 00 <= hour <= 11:
+                    
+                    if str(text) == "01:20":
+                        # print("Lovers time <3")
+                        profile_bio = f"❤️ | {bio_text} | ❤️"
+                        uvloop.install()
+                        await app.update_profile(bio=profile_bio, last_name=f"❤️『{lastname_text}』❤️")
 
-                app.update_profile(bio=profile_bio, last_name=f"『{lastname_text}』")
+                        
+                    else:
+                        profile_bio = f'ɢᴏᴏᴅ ᴍᴏʀɴɪɴɢ 🌅 | {bio_text}'
+                        uvloop.install()
+                        await app.update_profile(bio=profile_bio, last_name=f"『{lastname_text}』")
 
-            elif 18 <= hour <= 21:
-                profile_bio = f'ДОБРЫЙ ВЕЧЕР ⭐ | {bio_text}'
 
-                app.update_profile(bio=profile_bio, last_name=f"『{lastname_text}』")
+                elif 12 <= hour <= 17:
+                    profile_bio = f'ʙᴜᴇɴᴀꜱ ᴛᴀʀᴅᴇꜱ ☀ | {bio_text}'
+                    uvloop.install()
+                    await app.update_profile(bio=profile_bio, last_name=f"『{lastname_text}』")
 
-            else:
-                profile_bio = f'안녕히 주무세요 🌙 | {bio_text}'
 
-                app.update_profile(bio=profile_bio, last_name=f"『{lastname_text}』")
+                elif 18 <= hour <= 21:
+                    profile_bio = f'ДОБРЫЙ ВЕЧЕР ⭐ | {bio_text}'
+                    uvloop.install()
+                    await app.update_profile(bio=profile_bio, last_name=f"『{lastname_text}』")
 
-            app.update_profile(first_name="Put your name here")
-            sleep(1)
-            # app.update_profile(last_name=f"『{lastname_text}』") 
+                else:
+                    profile_bio = f'안녕히 주무세요 🌙 | {bio_text}'
+                    uvloop.install()
+                    await app.update_profile(bio=profile_bio, last_name=f"『{lastname_text}』")
 
-            # print(profile_bio, lastname_text)
+                uvloop.install()
+                await app.update_profile(first_name="ᴀʟɪ")
+                # app.update_profile(last_name=f"『{lastname_text}』")
+
+uvloop.install()
+
+if __name__ == "__main__":
+    asyncio.run(main())
