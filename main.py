@@ -54,27 +54,26 @@ async def main():
 
                 current_time = now.strftime("%H:%M")
                 hour = now.strftime("%H")
+                minute = now.strftime("%M")
                 hour = int(hour)
+                minute = int(minute)
 
                 text = current_time
                 bio_text = f"『{bio_clock_font(text)}』https://alibot.ir"
                 
                 lastname_text = name_clock_font(text)
                 
-
-                if 00 <= hour <= 11:
                     
-                    if str(text) == "01:20":
-                        # print("Lovers time <3")
-                        profile_bio = f"❤️ | {bio_text} | ❤️"
-                        uvloop.install()
-                        await app.update_profile(bio=profile_bio, last_name=f"❤️『{lastname_text}』❤️")
-
-                        
-                    else:
-                        profile_bio = f'ɢᴏᴏᴅ ᴍᴏʀɴɪɴɢ 🌅 | {bio_text}'
-                        uvloop.install()
-                        await app.update_profile(bio=profile_bio, last_name=f"『{lastname_text}』")
+                if  hour == minute:
+                    # print("Lovers time <3")
+                    profile_bio = f"❤️💚 | {bio_text} | ❤️💚"
+                    uvloop.install()
+                    await app.update_profile(bio=profile_bio, last_name=f"❤️『{lastname_text}』❤️")
+                    
+                elif 00 <= hour <= 11:
+                    profile_bio = f'ɢᴏᴏᴅ ᴍᴏʀɴɪɴɢ 🌅 | {bio_text}'
+                    uvloop.install()
+                    await app.update_profile(bio=profile_bio, last_name=f"『{lastname_text}』")
 
 
                 elif 12 <= hour <= 17:
@@ -94,7 +93,7 @@ async def main():
                     await app.update_profile(bio=profile_bio, last_name=f"『{lastname_text}』")
 
                 uvloop.install()
-                await app.update_profile(first_name="ᴀʟɪ")
+                await app.update_profile(first_name="YOUR NAME")
                 # app.update_profile(last_name=f"『{lastname_text}』")
 
 uvloop.install()
