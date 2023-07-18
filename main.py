@@ -53,28 +53,29 @@ async def main():
                 # Extracting current time (hour and minutes only)
 
                 current_time = now.strftime("%H:%M")
-                hour = now.strftime("%H")
-                hour = int(hour)
+                hour = int(now.strftime("%H"))
+                minute = int(now.strftime("%M"))
+
 
                 text = current_time
                 bio_text = f"『{bio_clock_font(text)}』https://alibot.ir"
                 
                 lastname_text = name_clock_font(text)
                 
+                if hour == minute:
+                    # print("Lovers time <3")
+                    profile_bio = f"❤️💚 | {bio_text} | 💚❤️"
+                    uvloop.install()
+                    await app.update_profile(bio=profile_bio, last_name=f"❤️『{lastname_text}』❤️")
+
 
                 if 00 <= hour <= 11:
                     
-                    if str(text) == "01:20":
-                        # print("Lovers time <3")
-                        profile_bio = f"❤️ | {bio_text} | ❤️"
-                        uvloop.install()
-                        await app.update_profile(bio=profile_bio, last_name=f"❤️『{lastname_text}』❤️")
 
                         
-                    else:
-                        profile_bio = f'ɢᴏᴏᴅ ᴍᴏʀɴɪɴɢ 🌅 | {bio_text}'
-                        uvloop.install()
-                        await app.update_profile(bio=profile_bio, last_name=f"『{lastname_text}』")
+                    profile_bio = f'ɢᴏᴏᴅ ᴍᴏʀɴɪɴɢ 🌅 | {bio_text}'
+                    uvloop.install()
+                    await app.update_profile(bio=profile_bio, last_name=f"『{lastname_text}』")
 
 
                 elif 12 <= hour <= 17:
@@ -94,7 +95,7 @@ async def main():
                     await app.update_profile(bio=profile_bio, last_name=f"『{lastname_text}』")
 
                 uvloop.install()
-                await app.update_profile(first_name="ᴀʟɪ")
+                await app.update_profile(first_name="Your name here.")
                 # app.update_profile(last_name=f"『{lastname_text}』")
 
 uvloop.install()
