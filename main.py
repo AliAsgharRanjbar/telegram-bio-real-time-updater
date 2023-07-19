@@ -4,6 +4,7 @@ from time import time, sleep       # Importing required packages
 from datetime import datetime
 import random
 import uvloop
+from pytz import timezone
 
 
 api_id = 123456789 # Your API_ID, You can get it from "https://my.telegram.org/"
@@ -49,7 +50,7 @@ async def main():
 
             if round(time()) % 60 == 0:
                 await asyncio.sleep(1)
-                now = datetime.now()
+                now = datetime.now(timezone('Asia/Tehran'))    # Change the 'Asia/Tehran' to your local timezone.
                 # Extracting current time (hour and minutes only)
 
                 current_time = now.strftime("%H:%M")
@@ -69,10 +70,7 @@ async def main():
                     await app.update_profile(bio=profile_bio, last_name=f"❤️『{lastname_text}』❤️")
 
 
-                if 00 <= hour <= 11:
-                    
-
-                        
+                elif 00 <= hour <= 11:
                     profile_bio = f'ɢᴏᴏᴅ ᴍᴏʀɴɪɴɢ 🌅 | {bio_text}'
                     uvloop.install()
                     await app.update_profile(bio=profile_bio, last_name=f"『{lastname_text}』")
