@@ -16,9 +16,12 @@ If you'd like to run this script on Windows, make sure to comment lines includin
 ## Usage
 
 ```python
+# first of all make sure to add your own api_id and api_hash to the script. (and other personalizations)
 python ./main.py
 
 # or python3 ./main.py
+
+# after running the script for the first time you need to provide your telegram phonenumber in order to get connected to your account.
 ```
 
 ## Contributing
