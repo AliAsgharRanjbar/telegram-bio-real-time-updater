@@ -11,7 +11,7 @@ pip install -r requirements.txt
 ```
 ### Note
 There's a *uvloop* package in requirements.txt file which does **NOT** support Windows.
-If you'd like to run this script on Windows, make sure to comment lines including `uvloop.install()`.
+If you'd like to run this script on Windows, make sure to comment lines including `uvloop.install()` and also make sure to remove the package name from requirements.txt file otherwise the installation of other packages will be ignored too.
 
 ## Usage
 
